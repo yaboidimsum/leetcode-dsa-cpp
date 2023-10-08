@@ -42,26 +42,10 @@ public:
         }
     }
 
-    void append(int value)
-    {
-        Node *newNode = new Node(value);
-        if (length == 0)
-        {
-            head = newNode;
-            tail = newNode;
-        }
-        else
-        {
-            tail->next = newNode;
-            tail = newNode;
-        }
-        length++;
-    }
-
     void printList()
     {
         Node *temp = head;
-        while (temp)
+        while (temp != nullptr)
         {
             cout << temp->value << endl;
             temp = temp->next;
@@ -97,6 +81,22 @@ public:
         cout << "Length: " << length << endl;
     }
 
+    void append(int value)
+    {
+        Node *newNode = new Node(value);
+        if (length == 0)
+        {
+            head = newNode;
+            tail = newNode;
+        }
+        else
+        {
+            tail->next = newNode;
+            tail = newNode;
+        }
+        length++;
+    }
+
     void deleteLast()
     {
         if (length == 0)
@@ -110,7 +110,6 @@ public:
         else
         {
             Node *pre = head;
-
             while (temp->next)
             {
                 pre = temp;
@@ -118,24 +117,6 @@ public:
             }
             tail = pre;
             tail->next = nullptr;
-        }
-        delete temp;
-        length--;
-    }
-
-    void deleteFirst()
-    {
-        if (length == 0)
-            return;
-        Node *temp = head;
-        if (length == 1)
-        {
-            head = nullptr;
-            tail = nullptr;
-        }
-        else
-        {
-            head = head->next;
         }
         delete temp;
         length--;
@@ -156,14 +137,31 @@ public:
         }
         length++;
     }
+
+    void deleteFirst()
+    {
+        if (length == 0)
+            return;
+        Node *temp = head;
+        if (length == 1)
+        {
+            head = nullptr;
+            tail = nullptr;
+        }
+        else
+        {
+            head = head->next;
+        }
+        delete temp;
+        length--;
+    }
+
     Node *get(int index)
     {
         if (index < 0 || index >= length)
-        {
             return nullptr;
-        }
         Node *temp = head;
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < index; ++i)
         {
             temp = temp->next;
         }
@@ -202,46 +200,55 @@ public:
         length++;
         return true;
     }
-
-    void deleteNode(int index){
-        if (index < 0 || index >= length) return;
-        if (index == 0) {
-            deleteFirst();
-            return;
-        }
-        if (index == length - 1) {
-            deleteLast();
-            return;
-        }
-        Node *prev = get(index - 1);
-        Node *temp = prev->next;
-        prev->next = temp->next;
-        delete temp;
-        length--;
-    }
-
-    void reverse(){
-        Node *temp = head;
-        head = tail;
-        tail = temp;
-        Node *after = temp->next;
-        Node *before = nullptr;
-        for (int i = 0; i < length; i++)
-        {
-            after = temp->next;
-            temp->next = before;
-            before = temp;
-            temp = after;
-        }
-    }
 };
 
 int main()
 {
-    LinkedList *myLinkedList = new LinkedList(0);
-    myLinkedList->append(1);
-    myLinkedList->append(2);
+
+    LinkedList *myLinkedList = new LinkedList(1);
     myLinkedList->append(3);
 
-    cout << myLinkedList->get(2)->value << endl;
+    cout << "LL before insert():" << endl;
+    myLinkedList->printList();
+
+    myLinkedList->insert(1, 2);
+
+    cout << "\nLL after insert(2) in middle:\n";
+    myLinkedList->printList();
+
+    myLinkedList->insert(0, 0);
+
+    cout << "\nLL after insert(0) at beginning:\n";
+    myLinkedList->printList();
+
+    myLinkedList->insert(4, 4);
+
+    cout << "\nLL after insert(4) at end:\n";
+    myLinkedList->printList();
+
+    /*  EXPECTED OUTPUT:
+        ----------------
+        LL before insert():
+        1
+        3
+
+        LL after insert(2) in middle:
+        1
+        2
+        3
+
+        LL after insert(0) at beginning:
+        0
+        1
+        2
+        3
+
+        LL after insert(4) at end:
+        0
+        1
+        2
+        3
+        4
+
+    */
 }
