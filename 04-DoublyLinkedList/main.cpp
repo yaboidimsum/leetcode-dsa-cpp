@@ -96,16 +96,4 @@ int main()
 
     cout << "\nDoubly Linked List:\n";
     myDLL->printList();
-
-    /*
-        EXPECTED OUTPUT:
-        ----------------
-        Head: 7
-        Tail: 7
-        Length: 1
-
-        Doubly Linked List:
-        7
-
-    */
 }
