@@ -138,13 +138,14 @@ class DoublyLinkedList {
             return temp;
         }
 
-        // WRITE SET MEMBER FUCTION HERE //
-        //                               //
-        //                               //
-        //                               //
-        //                               //
-        //                               //
-        ///////////////////////////////////    
+        bool set(int index, int value){
+            Node* temp = get(index);
+            if(temp){
+                temp->value = value;
+                return true;
+            }
+            return false;
+        }
 
 };
 
