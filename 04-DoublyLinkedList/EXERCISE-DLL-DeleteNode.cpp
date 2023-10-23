@@ -122,22 +122,60 @@ class DoublyLinkedList {
             length--;
         }
 
-        Node* get(int index){
-            if(index < 0 || index >= length) return nullptr;
+        Node* get(int index) {
+            if (index < 0 || index >= length) return nullptr;
             Node* temp = head;
-            if (index < length/2){
-                for (int i=0 ; i<index ; i++){
+            if (index < length/2) {
+                for (int i = 0; i < index; ++i) {
                     temp = temp->next;
                 }
-            }
-            else{
+            } else {
                 temp = tail;
-                for (int i = length - 1; i > index; i--){
+                for (int i = length - 1; i > index; --i) {
                     temp = temp->prev;
                 }
             }
             return temp;
         }
+
+        bool set(int index, int value) {
+            Node* temp = get(index);
+            if (temp) {
+                temp->value = value;
+                return true;
+            }
+            return false;
+        }
+
+        bool insert(int index, int value) {
+            if (index < 0 || index > length) return false;
+            if (index == 0) {
+                prepend(value);
+                return true;
+            } 
+            if (index == length) {
+                append(value);
+                return true;
+            } 
+    
+            Node* newNode = new Node(value);
+            Node* before = get(index - 1);
+            Node* after = before->next;
+            newNode->prev = before;
+            newNode->next = after;
+            before->next = newNode;
+            after->prev = newNode;
+            length++;
+            return true;
+        }       
+
+        // WRITE DELETENODE MEMBER FUNCTION HERE //
+        //                                       //
+        //                                       //
+        //                                       //
+        //                                       //
+        //                                       //
+        /////////////////////////////////////////// 
 
 };
 
@@ -145,28 +183,57 @@ class DoublyLinkedList {
 
 int main() {
         
-    DoublyLinkedList* myDLL = new DoublyLinkedList(0);
-    myDLL->append(1);
+    DoublyLinkedList* myDLL = new DoublyLinkedList(1);
     myDLL->append(2);
     myDLL->append(3);
+    myDLL->append(4);
+    myDLL->append(5);
 
-    cout << "Get in first half of DLL:\n";
-    cout << myDLL->get(1)->value;
 
-    cout << "\n\nGet in second half of DLL:\n";
-    cout << myDLL->get(2)->value;
+    cout << "DLL before deleteNode():\n";
+    myDLL->printList();
 
-     /*
+
+    myDLL->deleteNode(2);
+    cout << "\nDLL after deleteNode() in middle:\n";
+    myDLL->printList();
+
+
+    myDLL->deleteNode(0);
+    cout << "\nDLL after deleteNode() of first node:\n";
+    myDLL->printList();
+
+
+    myDLL->deleteNode(2);
+    cout << "\nDLL after deleteNode() of last node:\n";
+    myDLL->printList();
+
+    /*  
         EXPECTED OUTPUT:
         ----------------
-        Get in first half of DLL:
+        DLL before deleteNode():
         1
-
-        Get in second half of DLL:
         2
+        3
+        4
+        5
+
+        DLL after deleteNode() in middle:
+        1
+        2
+        4
+        5
+
+        DLL after deleteNode() of first node:
+        2
+        4
+        5
+
+        DLL after deleteNode() of last node:
+        2
+        4
     
     */
         
 }
-
 

@@ -122,22 +122,29 @@ class DoublyLinkedList {
             length--;
         }
 
-        Node* get(int index){
-            if(index < 0 || index >= length) return nullptr;
+        Node* get(int index) {
+            if (index < 0 || index >= length) return nullptr;
             Node* temp = head;
-            if (index < length/2){
-                for (int i=0 ; i<index ; i++){
+            if (index < length/2) {
+                for (int i = 0; i < index; ++i) {
                     temp = temp->next;
                 }
-            }
-            else{
+            } else {
                 temp = tail;
-                for (int i = length - 1; i > index; i--){
+                for (int i = length - 1; i > index; --i) {
                     temp = temp->prev;
                 }
             }
             return temp;
         }
+
+        // WRITE SET MEMBER FUCTION HERE //
+        //                               //
+        //                               //
+        //                               //
+        //                               //
+        //                               //
+        ///////////////////////////////////    
 
 };
 
@@ -150,23 +157,31 @@ int main() {
     myDLL->append(2);
     myDLL->append(3);
 
-    cout << "Get in first half of DLL:\n";
-    cout << myDLL->get(1)->value;
+    cout << "DLL before set():" << endl;
+    myDLL->printList();
 
-    cout << "\n\nGet in second half of DLL:\n";
-    cout << myDLL->get(2)->value;
+    myDLL->set(2, 99);
 
-     /*
+    cout << endl << "LL after set():" << endl;
+    myDLL->printList();  
+
+
+    /*  
         EXPECTED OUTPUT:
         ----------------
-        Get in first half of DLL:
+        LL before set():
+        0
         1
-
-        Get in second half of DLL:
         2
+        3
+
+        LL after set():
+        0
+        1
+        99
+        3
     
     */
         
 }
-
 

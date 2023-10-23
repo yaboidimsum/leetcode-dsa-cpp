@@ -122,22 +122,38 @@ class DoublyLinkedList {
             length--;
         }
 
-        Node* get(int index){
-            if(index < 0 || index >= length) return nullptr;
+        Node* get(int index) {
+            if (index < 0 || index >= length) return nullptr;
             Node* temp = head;
-            if (index < length/2){
-                for (int i=0 ; i<index ; i++){
+            if (index < length/2) {
+                for (int i = 0; i < index; ++i) {
                     temp = temp->next;
                 }
-            }
-            else{
+            } else {
                 temp = tail;
-                for (int i = length - 1; i > index; i--){
+                for (int i = length - 1; i > index; --i) {
                     temp = temp->prev;
                 }
             }
             return temp;
         }
+
+        bool set(int index, int value) {
+            Node* temp = get(index);
+            if (temp) {
+                temp->value = value;
+                return true;
+            }
+            return false;
+        }
+
+ 		// WRITE INSERT MEMBER FUNCTION HERE //
+        //                                   //
+        //                                   //
+        //                                   //
+        //                                   //
+        //                                   //
+        /////////////////////////////////////// 	     
 
 };
 
@@ -145,28 +161,54 @@ class DoublyLinkedList {
 
 int main() {
         
-    DoublyLinkedList* myDLL = new DoublyLinkedList(0);
-    myDLL->append(1);
-    myDLL->append(2);
+    DoublyLinkedList* myDLL = new DoublyLinkedList(1);
     myDLL->append(3);
 
-    cout << "Get in first half of DLL:\n";
-    cout << myDLL->get(1)->value;
+    cout << "DLL before insert():" << endl;
+    myDLL->printList();
+    
+    myDLL->insert(1, 2);
 
-    cout << "\n\nGet in second half of DLL:\n";
-    cout << myDLL->get(2)->value;
+    cout << "\nDLL after insert(2) in middle:\n";
+    myDLL->printList();
 
-     /*
+    myDLL->insert(0, 0);
+
+    cout << "\nDLL after insert(0) at beginning:\n";
+    myDLL->printList();
+
+    myDLL->insert(4, 4);
+
+    cout << "\nDLL after insert(4) at end:\n";
+    myDLL->printList();
+
+
+    /*  
         EXPECTED OUTPUT:
         ----------------
-        Get in first half of DLL:
+        DLL before insert():
         1
+        3
 
-        Get in second half of DLL:
+        DLL after insert(2) in middle:
+        1
         2
+        3
+
+        DLL after insert(0) at beginning:
+        0
+        1
+        2
+        3
+
+        DLL after insert(4) at end:
+        0
+        1
+        2
+        3
+        4
     
     */
-        
+  
 }
-
 
