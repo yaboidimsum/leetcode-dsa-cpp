@@ -110,26 +110,30 @@ public:
     //   | - Check output from Test.cpp in "User logs".        |
     //   +=====================================================+
 
-    void swapPairs()
-    {
-        if (length == 0 || length == 1)
-        {
-            return;
+    void swapPairs() {
+            Node dummyNode(0);
+            dummyNode.next = head;
+            Node* previousNode = &dummyNode;
+        
+            while (head != nullptr && head->next != nullptr) {
+                Node* firstNode = head;
+                Node* secondNode = head->next;
+        
+                previousNode->next = secondNode;
+                firstNode->next = secondNode->next;
+                secondNode->next = firstNode;
+        
+                secondNode->prev = previousNode;
+                firstNode->prev = secondNode;
+                if (firstNode->next != nullptr) {
+                    firstNode->next->prev = firstNode;
+                }
+        
+                head = firstNode->next;
+                previousNode = firstNode;
+            }
+        
+            head = dummyNode.next;
+            if (head) head->prev = nullptr;
         }
-        Node *dummyNode = new Node(0);
-        dummyNode->next = head;
-        Node *current = dummyNode;
-        while (current->next != nullptr && current->next->next != nullptr)
-        {
-            Node *first = current->next;
-            Node *second = current->next->next;
-
-            first->next = second->next;
-            second->next = first;
-            current->next = second;
-            current = current->next->next;
-        }
-        head = dummyNode->next;
-        delete dummyNode;
-    }
 };
