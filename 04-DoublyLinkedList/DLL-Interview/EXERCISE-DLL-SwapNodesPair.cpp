@@ -109,4 +109,27 @@ public:
     //   |   one node.                                         |
     //   | - Check output from Test.cpp in "User logs".        |
     //   +=====================================================+
+
+    void swapPairs()
+    {
+        if (length == 0 || length == 1)
+        {
+            return;
+        }
+        Node *dummyNode = new Node(0);
+        dummyNode->next = head;
+        Node *current = dummyNode;
+        while (current->next != nullptr && current->next->next != nullptr)
+        {
+            Node *first = current->next;
+            Node *second = current->next->next;
+
+            first->next = second->next;
+            second->next = first;
+            current->next = second;
+            current = current->next->next;
+        }
+        head = dummyNode->next;
+        delete dummyNode;
+    }
 };
