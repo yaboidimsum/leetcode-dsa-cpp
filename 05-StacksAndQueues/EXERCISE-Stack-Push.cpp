@@ -56,13 +56,12 @@ class Stack {
             cout << "Height: " << height << endl;
         }
 
-        // WRITE PUSH MEMBER FUCTION HERE //
-        //                                //
-        //                                //
-        //                                //
-        //                                //
-        //                                //
-        ////////////////////////////////////
+        void push(int value){
+            Node* newNode = new Node(value);
+            newNode->next = top;
+            top = newNode;
+            height++;
+        }
         
 };
 
