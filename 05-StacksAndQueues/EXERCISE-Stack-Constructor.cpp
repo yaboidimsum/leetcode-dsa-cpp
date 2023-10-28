@@ -3,31 +3,29 @@
 using namespace std;
 
 
-	// CREATE NODE CLASS HERE //
-	//                        //
-	//                        //
-	//                        //
-	//                        //
-	////////////////////////////
+class Node {
+    public:
+        int value;
+        Node* next;
+
+        Node(int value) {
+            this->value = value;
+            next = nullptr;
+        }
+};
 
 
 class Stack {
     private:
-		// CREATE MEMBER VARIABLES HERE //
-		//                              //
-		//                              //
-		//                              //
-		//                              //
-		//////////////////////////////////
-
+        Node* top;
+        int height;
     public:
-		// CREATE STACK CONSTRUCTOR HERE //
-		//                               //
-		//                               //
-		//                               //
-		//                               //
-		///////////////////////////////////
-		
+        Stack(int value){
+            Node* newNode = new Node(value);
+            top = newNode;
+            height = 1;
+        }
+
         ~Stack() {
             Node* temp = top;
             while (top) {
