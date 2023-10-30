@@ -2,81 +2,98 @@
 
 using namespace std;
 
+// CREATE NODE CLASS HERE //
+class Node
+{
+public:
+    int value;
+    Node *next;
 
-	// CREATE NODE CLASS HERE //
-	//                        //
-	//                        //
-	//                        //
-	//                        //
-	////////////////////////////
-
-
-class Queue {
-    private:
-		// CREATE MEMBER VARIABLES HERE //
-		//                              //
-		//                              //
-		//                              //
-		//                              //
-		//////////////////////////////////
-
-    public:
-		// CREATE QUEUE CONSTRUCTOR HERE //
-		//                               //
-		//                               //
-		//                               //
-		//                               //
-		///////////////////////////////////
-
-        ~Queue() {
-            Node* temp = first;
-            while (first) {
-                first = first->next;
-                delete temp;
-                temp = first;
-            }
-        }
-
-        void printQueue() {
-            Node* temp = first;
-            while (temp) {
-                cout << temp->value << endl;
-                temp = temp->next;
-            }
-        }
-
-        void getFirst() {
-            if (first == nullptr) {
-                cout << "First: nullptr" << endl;
-            } else {
-                cout << "First: " << first->value << endl;
-            }
-        }
-
-        void getLast() {
-            if (last == nullptr) {
-                cout << "Last: nullptr" << endl;
-            } else { 
-                cout << "Last: " << last->value << endl;
-            }  
-        }
-
-        void getLength() {
-            cout << "Length: " << length << endl;
-        }
-        
-        bool isEmpty() {
-            if (length == 0) return true;
-            return false;
-        }
-
+    Node(int value)
+    {
+        this->value = value;
+        next = nullptr;
+    }
 };
 
+class Queue
+{
+private:
+    Node *first;
+    Node *last;
+    int length;
 
+public:
+    Queue(int value)
+    {
+        Node *newNode = new Node(value);
+        first = newNode;
+        last = newNode;
+        length = 1;
+    }
 
-int main() {
-        
-    Queue* myQueue = new Queue(7);
+    ~Queue()
+    {
+        Node *temp = first;
+        while (first)
+        {
+            first = first->next;
+            delete temp;
+            temp = first;
+        }
+    }
+
+    void printQueue()
+    {
+        Node *temp = first;
+        while (temp)
+        {
+            cout << temp->value << endl;
+            temp = temp->next;
+        }
+    }
+
+    void getFirst()
+    {
+        if (first == nullptr)
+        {
+            cout << "First: nullptr" << endl;
+        }
+        else
+        {
+            cout << "First: " << first->value << endl;
+        }
+    }
+
+    void getLast()
+    {
+        if (last == nullptr)
+        {
+            cout << "Last: nullptr" << endl;
+        }
+        else
+        {
+            cout << "Last: " << last->value << endl;
+        }
+    }
+
+    void getLength()
+    {
+        cout << "Length: " << length << endl;
+    }
+
+    bool isEmpty()
+    {
+        if (length == 0)
+            return true;
+        return false;
+    }
+};
+
+int main()
+{
+
+    Queue *myQueue = new Queue(7);
 
     myQueue->getFirst();
     myQueue->getLast();
@@ -85,7 +102,7 @@ int main() {
     cout << "\nQueue:\n";
     myQueue->printQueue();
 
-    /*  
+    /*
         EXPECTED OUTPUT:
         ----------------
         First: 7
@@ -95,7 +112,5 @@ int main() {
         Queue:
         7
 
-    */    
-
+    */
 }
-
